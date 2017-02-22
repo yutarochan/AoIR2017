@@ -1,2 +1,4 @@
 # AoIR2017
-AoIR 2017 - Presidential Candidate Data Analysis
+Research Repository for the Association of Internet Researchers 2017 Conference
+
+2017 Presidential Candidate Exploratory Data Analysis :us:
