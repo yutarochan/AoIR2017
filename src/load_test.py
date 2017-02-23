@@ -32,4 +32,4 @@ tokens = tokens.map(lambda tok: [t for t in tok if t not in stop.value])
 # Compute Word Frequency
 token_count = tokens.flatMap(lambda x: (x, 1)).reduceByKey(add).collect()
 output = open('clinton-20161019-wordFreq.csv', 'wb')
-tokens.foreach(lambda x: output.write(x[0]+','+x[1]+'\n'))
+tokens.foreach(lambda x: output.write(str(x)+'\n'))
