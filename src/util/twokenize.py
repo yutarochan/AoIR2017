@@ -80,7 +80,7 @@ ProtectThese = [
     # Timelike,
     # NumNum,
     # NumberWithCommas,
-    # Punct,
+    Punct,
     ArbitraryAbbrev,
     # Separators,
     # Decorations,

@@ -18,5 +18,8 @@ json_data = raw_data.map(lambda x: json.loads(x))
 print 'TOTAL TWEETS LOADED: ' + str(json_data.count())
 
 # Preprocessing Phase
-raw_tweets = json_data.map(lambda x: filter(None, [re.sub(r'[^A-Za-z0-9]+', '', x), tk.simple_tokenize(x['text'])]))
-print raw_tweets.take(1)
+
+tokens = tk.simple_tokenize(raw_string)                                     # Tokenize
+tokens = filter(None, [re.sub(r'[^A-Za-z0-9]+', '', x) for x in tokens])    # Remove Empty String
+tokens = filter(lambda x: !x.startswith('http'), tokens)                    # Remove HTTP URLS
+tokens = filter(lambda x: x != 'RT', tokens)                                # Filter RT Token
