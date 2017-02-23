@@ -21,5 +21,7 @@ print 'TOTAL TWEETS LOADED: ' + str(json_data.count())
 
 tokens = tk.simple_tokenize(raw_string)                                     # Tokenize
 tokens = filter(None, [re.sub(r'[^A-Za-z0-9]+', '', x) for x in tokens])    # Remove Empty String
-tokens = filter(lambda x: !x.startswith('http'), tokens)                    # Remove HTTP URLS
+tokens = filter(lambda x: x.startswith('http') == False, tokens)            # Remove HTTP URLS
 tokens = filter(lambda x: x != 'RT', tokens)                                # Filter RT Token
+
+print tokens.take(1)
