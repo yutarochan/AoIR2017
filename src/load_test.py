@@ -4,6 +4,7 @@ Author: Yuya Jeremy Ong (yjo5006@psu.edu)
 '''
 import re
 import json
+from operator import add
 import util.twokenize as tk
 
 from pyspark import SparkContext, SparkConf
@@ -28,4 +29,7 @@ stopwords = open('res/stopwords.txt', 'rb')
 stop = sc.broadcast(stopwords.read().split('\n')[:-1])
 tokens = tokens.map(lambda tok: [t for t in tok if t not in stop.value])
 
-print tokens.take(1)
+# Compute Word Frequency
+token_count = tokens.flatMap(lambda x: (x, 1)).reduceByKey(add).collect()
+output = open('clinton-20161019-wordFreq.csv', 'wb')
+tokens.foreach(lambda x: output.write(x[0]+','+x[1]+'\n'))
