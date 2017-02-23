@@ -30,6 +30,6 @@ stop = sc.broadcast(stopwords.read().split('\n')[:-1])
 tokens = tokens.map(lambda tok: [t for t in tok if t not in stop.value])
 
 # Compute Word Frequency
-token_count = tokens.flatMap(lambda x: (x, 1)).reduceByKey(add).collect()
+token_count = tokens.flatMap(lambda x: [(i,1) for i in x]).reduceByKey(add).sortBy(lambda (word, count): count).collect()
 output = open('clinton-20161019-wordFreq.csv', 'wb')
 tokens.foreach(lambda x: output.write(str(x)+'\n'))
