@@ -18,5 +18,5 @@ json_data = raw_data.map(lambda x: json.loads(x))
 print 'TOTAL TWEETS LOADED: ' + str(text_file.count())
 
 # Preprocessing Phase
-raw_tweets = json_data.map(lambda x: filter(None, [re.sub(r'[^A-Za-z0-9]+', '', x), tk.simple_tokenize(x['text'])])
+raw_tweets = json_data.map(lambda x: filter(None, [re.sub(r'[^A-Za-z0-9]+', '', x), tk.simple_tokenize(x['text'])]))
 print raw_tweets.take(1)
