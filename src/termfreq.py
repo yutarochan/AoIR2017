@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 '''
-Basic Data Loading Test
+Term Frequency Counts
 Author: Yuya Jeremy Ong (yjo5006@psu.edu)
 '''
 import re
