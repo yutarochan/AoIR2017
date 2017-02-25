@@ -14,7 +14,9 @@ from pyspark import SparkContext, SparkConf
 sc = SparkContext()
 
 # Load and Parse JSON Data
-raw_data = sc.textFile("hdfs:///user/yjo5006/AOIR2017/data/"+sys.argv[2]+".json")
+FILENAME = 'clinton-20160926'
+
+raw_data = sc.textFile("hdfs:///user/yjo5006/AOIR2017/data/"+FILENAME+".json")
 json_data = raw_data.map(lambda x: json.loads(x))
 
 print 'TOTAL TWEETS LOADED: ' + str(json_data.count())
@@ -37,5 +39,5 @@ tokens = tokens.map(lambda tok: [t for t in tok if t not in stop.value])
 token_count = tokens.flatMap(lambda x: [(i,1) for i in x]).reduceByKey(add).sortBy(lambda (word, count): count).collect()
 
 # Generate Output Files
-output = open(sys.argv[2]+'-wordFreq.csv', 'wb')
+output = open(FILENAME+'-wordFreq.csv', 'wb')
 tokens.foreach(lambda x: output.write(str(x)+'\n'))
