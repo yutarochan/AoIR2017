@@ -25,12 +25,12 @@ for FILENAME in DATASETS:
     print 'TOTAL TWEETS LOADED: ' + str(json_data.count())
 
     # Preprocessing Phase
-    tokens = json_data.map(lambda x: tk.preprocess(x['text'], True, True, True, True, True, True, True))
+    tokens = json_data.map(lambda x: tk.preprocess(x['text'].encode('utf-8'), True, True, True, True, True, True, True))
 
     # Remove Stopwords
     stopwords = open('res/stopwords.txt', 'rb')
     stop = sc.broadcast(stopwords.read().split('\n')[:-1])
-    tokens = tokens.map(lambda tok: [t.decode('utf-8') for t in tok if t not in stop.value])
+    tokens = tokens.map(lambda tok: [t for t in tok if t not in stop.value])
 
     # Compute Word Frequency
     token_count = tokens.flatMap(lambda x: [(i.decode('utf-8'),1) for i in x]).reduceByKey(add).sortBy(lambda (word, count): count, False).collect()
