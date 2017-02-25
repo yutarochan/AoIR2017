@@ -15,6 +15,12 @@ sc = SparkContext()
 
 # Load and Parse JSON Data
 FILENAME = 'clinton-20160926'
+'''
+FILENAME = 'clinton-20161009'
+FILENAME = 'clinton-20161019'
+FILENAME = 'trump-20160926'
+FILENAME = 'trump-20161009'
+'''
 
 raw_data = sc.textFile("hdfs:///user/yjo5006/AOIR2017/data/"+FILENAME+".json")
 json_data = raw_data.map(lambda x: json.loads(x))
@@ -40,4 +46,6 @@ token_count = tokens.flatMap(lambda x: [(i,1) for i in x]).reduceByKey(add).sort
 
 # Generate Output Files
 output = open(FILENAME+'-wordFreq.csv', 'wb')
-tokens.foreach(lambda x: output.write(str(x[0]).encode('utf-8')+','+str(x[1])+'\n'))
+for x in token_count:
+    output.write(str(x[0]).encode('utf-8')+','+str(x[1])+'\n')
+output.close()
