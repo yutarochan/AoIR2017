@@ -18,7 +18,7 @@ DATASETS = ['clinton-20160926', 'clinton-20161009', 'clinton-20161019', 'trump-2
 for FILENAME in DATASETS:
     # Import Dataset
     raw_data = sc.textFile("hdfs:///user/yjo5006/AOIR2017/data/"+FILENAME+".json")
-    json_data = raw_data.map(lambda x: json.loads(x.encode('utf-8')))
+    json_data = raw_data.map(lambda x: json.loads(x.decode('utf-8')))
     print 'TOTAL TWEETS LOADED: ' + str(json_data.count())
 
     # Preprocessing Phase
