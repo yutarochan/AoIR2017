@@ -6,7 +6,7 @@ import re
 import sys
 import json
 from operator import add
-import tokenizer as tk
+import util.tokenizer as tk
 
 from pyspark import SparkContext, SparkConf
 
