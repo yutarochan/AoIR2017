@@ -52,6 +52,7 @@ for FILENAME in DATASETS:
     # Preprocessing Phase
     # tokens = json_data.map(lambda x: tk.preprocess(x['text'].encode('utf-8'), True, True, True, True, True, True, True))
     tokens = json_data.map(lambda x: tokens_re.findall(x['text']))
+    tokens = tokens.map(lambda tok: [t.lower() for t in tok]) # Text Normalization
     tokens = tokens.map(lambda x: filter(None, [token.rstrip(string.punctuation) for token in x])) # Punctuation Removal
     tokens = tokens.map(lambda tok: filter(lambda x: not x.startswith('http'), tok)) # HTTP Link Removal
     tokens = tokens.map(lambda tok: filter(lambda x: not x.startswith('#'), tok)) # Hashtag Removal
@@ -64,7 +65,7 @@ for FILENAME in DATASETS:
     tokens = tokens.map(lambda tok: [t for t in tok if t not in stop_en.value])
 
     # Remove Spanish Stopwords
-    stopwords_es = open('res/stopwords.txt', 'rb')
+    stopwords_es = open('res/stopwords_es.txt', 'rb')
     stop_es = sc.broadcast(stopwords_es.read().split('\n')[:-1])
     tokens = tokens.map(lambda tok: [t for t in tok if t not in stop_es.value])
 
