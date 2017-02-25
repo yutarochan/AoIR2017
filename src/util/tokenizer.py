@@ -34,12 +34,11 @@ def tokenize(s):
 def preprocess(s, lowercase=False, symbols=False, punct=False, http=False, hashtag=False, user=True, RT=False):
     tokens = tokenize(s)
     if lowercase: tokens = [token.lower() for token in tokens]
-    if punct: tokens = filter(None, [token.rstrip(string.punctuation) for token in tokens])
+    if punct: tokens = filter(None, [token.rstrip(string.punctuation+'…') for token in tokens])
     if http: tokens = filter(lambda x: not x.startswith('http'), tokens)
     if hashtag: tokens = filter(lambda x: not x.startswith('#'), tokens)
     if user: tokens = filter(lambda x: not x.startswith('@'), tokens)
     if RT: tokens = filter(lambda x: x.lower() != 'rt', tokens)
-
     return tokens
 
 if __name__ == '__main__':
