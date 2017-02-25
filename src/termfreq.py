@@ -9,6 +9,9 @@ import json
 from operator import add
 import util.tokenizer as tk
 
+reload(sys)
+sys.setdefaultencoding('utf8')
+
 from pyspark import SparkContext, SparkConf
 sc = SparkContext()
 
