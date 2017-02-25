@@ -54,6 +54,6 @@ for FILENAME in DATASETS:
 
     # Generate Output Files
     output = open(FILENAME+'-hashtagfreq.csv', 'wb')
-    for x in token_count:
+    for x in hashtag_count:
         output.write(str(x[0].encode('utf-8'))+','+str(x[1]).encode('utf-8')+'\n')
     output.close()
