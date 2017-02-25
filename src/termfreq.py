@@ -58,10 +58,15 @@ for FILENAME in DATASETS:
     tokens = tokens.map(lambda tok: filter(lambda x: not x.startswith('@'), tok)) # Username Removal
     tokens = tokens.map(lambda tok: filter(lambda x: x.lower() != 'rt', tok)) # RT Token Removal
 
-    # Remove Stopwords
-    stopwords = open('res/stopwords.txt', 'rb')
-    stop = sc.broadcast(stopwords.read().split('\n')[:-1])
-    tokens = tokens.map(lambda tok: [t for t in tok if t not in stop.value])
+    # Remove English Stopwords
+    stopwords_en = open('res/stopwords.txt', 'rb')
+    stop_en = sc.broadcast(stopwords_en.read().split('\n')[:-1])
+    tokens = tokens.map(lambda tok: [t for t in tok if t not in stop_en.value])
+
+    # Remove Spanish Stopwords
+    stopwords_es = open('res/stopwords.txt', 'rb')
+    stop_es = sc.broadcast(stopwords_es.read().split('\n')[:-1])
+    tokens = tokens.map(lambda tok: [t for t in tok if t not in stop_es.value])
 
     # Compute Word Frequency
     token_count = tokens.flatMap(lambda x: [(i,1) for i in x]).reduceByKey(add).sortBy(lambda (word, count): count, False).collect()
