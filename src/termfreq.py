@@ -30,7 +30,7 @@ for FILENAME in DATASETS:
     tokens = tokens.map(lambda tok: [t for t in tok if t not in stop.value])
 
     # Compute Word Frequency
-    token_count = tokens.flatMap(lambda x: [(i,1) for i in x if len(i) > 2]).reduceByKey(add).sortBy(lambda (word, count): count, False).collect()
+    token_count = tokens.flatMap(lambda x: [(i,1) for i in x).reduceByKey(add).sortBy(lambda (word, count): count, False).collect()
 
     # Generate Output Files
     output = open(FILENAME+'-termfreq.csv', 'wb')
