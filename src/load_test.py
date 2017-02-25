@@ -43,7 +43,7 @@ stop = sc.broadcast(stopwords.read().split('\n')[:-1])
 tokens = tokens.map(lambda tok: [t for t in tok if t not in stop.value])
 
 # Compute Word Frequency
-token_count = tokens.flatMap(lambda x: [(i,1) for i in x]).reduceByKey(add).sortBy(lambda (word, count): count).collect()
+token_count = tokens.flatMap(lambda x: [(i,1) for i in x]).reduceByKey(add).sortBy(lambda (word, count): count, False).collect()
 
 # Generate Output Files
 output = open(FILENAME+'-wordFreq.csv', 'wb')
