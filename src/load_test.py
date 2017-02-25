@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 '''
 Basic Data Loading Test
 Author: Yuya Jeremy Ong (yjo5006@psu.edu)
@@ -47,5 +48,5 @@ token_count = tokens.flatMap(lambda x: [(i,1) for i in x]).reduceByKey(add).sort
 # Generate Output Files
 output = open(FILENAME+'-wordFreq.csv', 'wb')
 for x in token_count:
-    output.write(str(x[0]).encode('utf-8')+','+str(x[1])+'\n')
+    output.write(str(x[0].encode('utf-8'))+','+str(x[1]).encode('utf-8')+'\n')
 output.close()
