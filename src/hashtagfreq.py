@@ -50,7 +50,7 @@ for FILENAME in DATASETS:
     print 'TOTAL TWEETS LOADED: ' + str(json_data.count())
 
     # Hashtag Extraction Count
-    hashtag_count = json_data.flatMap(lambda x: [(i,1) for i in x['hashtags']]).reduceByKey(add).sortBy(lambda (word, count): count, False).collect()
+    hashtag_count = json_data.flatMap(lambda x: [(i['text'],1) for i in x['entities']['hashtags']]).reduceByKey(add).sortBy(lambda (word, count): count, False).collect()
 
     # Generate Output Files
     output = open(FILENAME+'-hashtagfreq.csv', 'wb')
