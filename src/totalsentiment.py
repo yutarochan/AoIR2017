@@ -79,10 +79,10 @@ for FILENAME in DATASETS:
 
     # Generate Output Files
     output = open(FILENAME+'-termfreq.csv', 'wb')
-    output.write('POSITIVE TOKENS: ' + pos_count + '\n')
-    output.write('NEGATIVE TOKENS: ' + neg_count + '\n')
-    output.write('TOTAL TOKENS: ' + total + '\n\n')
-    output.write('SENTIMENT SCORE: ' + score + '\n')
+    output.write('POSITIVE TOKENS: ' + str(pos_count) + '\n')
+    output.write('NEGATIVE TOKENS: ' + str(neg_count) + '\n')
+    output.write('TOTAL TOKENS: ' + str(total) + '\n\n')
+    output.write('SENTIMENT SCORE: ' + str(score) + '\n')
     output.close()
 
     # for x in token_count:
