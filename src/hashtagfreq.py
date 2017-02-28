@@ -17,7 +17,7 @@ from pyspark import SparkContext, SparkConf
 sc = SparkContext()
 
 # [Application Parameters]
-DATASETS = ['clinton-20160926', 'clinton-20161009', 'clinton-20161019', 'trump-20160926', 'trump-20161009']
+DATASETS = ['clinton-20160926', 'clinton-20161009', 'clinton-20161019', 'trump-20160926', 'trump-20161009', 'trump-20161019']
 
 # Preprocessing Regex
 emoticons_str = r"""
