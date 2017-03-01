@@ -75,7 +75,8 @@ for FILENAME in DATASETS:
     total = tokens.flatMap(lambda x: x).count()
 
     # Compute Score
-    score = math.log(pos_count + 0.5) - math.log(total + 0.5)
+    # score = math.log(pos_count + 0.5) - math.log(total + 0.5)
+    score = (pos_count - neg_count) / (pos_count + neg_count)
 
     # Generate Output Files
     output = open(FILENAME+'-termfreq.csv', 'wb')
