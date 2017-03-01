@@ -70,8 +70,8 @@ for FILENAME in DATASETS:
     neg = sc.broadcast(neg_sent.read().split('\n')[:-1])
 
     # Compute Aggregate Sentiment
-    pos_words = tokens.flatMap(lambda x: [(i, 1) if i in pos.value for i in x]).reduceByKey(add).sortBy(lambda (word, count): count, False).collect()
-    neg_words = tokens.flatMap(lambda x: [(i, 1) if i in neg.value for i in x]).reduceByKey(add).sortBy(lambda (word, count): count, False).collect()
+    pos_words = tokens.flatMap(lambda x: [(i, 1) for i in x if i in pos.value]).reduceByKey(add).sortBy(lambda (word, count): count, False).collect()
+    neg_words = tokens.flatMap(lambda x: [(i, 1) for i in x if i in neg.value]).reduceByKey(add).sortBy(lambda (word, count): count, False).collect()
 
     # Generate Output Files
     output = open(FILENAME+'_pos-srank.csv', 'wb')
